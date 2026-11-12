@@ -79,6 +79,19 @@ footer a{color:var(--muted)}
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#111;color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;font-size:.92rem;opacity:0;transition:.25s;z-index:99;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media (max-width:420px){html{font-size:16px}.ch{padding:11px 12px 7px}.cb{padding:0 12px 12px}}
+.books{margin:26px 0 8px}
+.books h2{font-size:1.25rem;font-weight:900;letter-spacing:-.01em;margin-bottom:4px}
+.books .lead{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+.bookgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:720px){.bookgrid{grid-template-columns:1fr}}
+.book{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;gap:16px;align-items:flex-start}
+.book img{width:112px;height:auto;flex:none;border-radius:6px}
+.book .bt{font-weight:800;font-size:1.05rem;line-height:1.35;color:var(--ink)}
+.book .bm{color:var(--muted);font-size:.82rem;margin:2px 0 8px}
+.book ul{margin:0 0 12px 1.05em;font-size:.92rem;color:var(--body)}
+.book li{margin-bottom:3px}
+.buy{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;font-size:.9rem;border-radius:999px;padding:8px 16px}
+.buy:hover{background:var(--coral)}
 </style>
 </head>
 <body>
@@ -350,6 +363,38 @@ footer a{color:var(--muted)}
   </table></div>
   <div class="box blue"><b>창발인가, 위탁인가</b>: 생각을 넓히는 쓰임(모르는 단어 묻기, 내 초안에 질문형 피드백 받기, 반대 근거 묻기)은 권하고, 생각을 대신하는 쓰임(감상문·에세이 통째로 받기, 답만 받아 옮기기)은 피합니다.</div>
 </section>
+<div class="books" id="books">
+  <h2>강연에 나온 책 두 권</h2>
+  <p class="lead">오늘 이야기의 바탕이 된 책입니다. 버튼을 누르면 교보문고 구매 페이지로 갑니다.</p>
+  <div class="bookgrid">
+    <div class="book">
+      <img src="assets/book_ai2027.jpg" alt="AI2027 트렌드&amp;활용백과 표지" loading="lazy">
+      <div>
+        <div class="bt">AI2027 트렌드&amp;활용백과</div>
+        <div class="bm">김덕진 지음 · 스마트북스 · 2026년 11월 2일 출간</div>
+        <ul>
+          <li>써본 만큼에서 맡겨본 만큼으로: AI와 일을 나누는 협업 4단계</li>
+          <li>맡기기 전에 멈출 자리부터: 권한 문장과 명세 6칸</li>
+          <li>아이들의 인지적 빚: 막을지보다 어떤 순서로 쓰게 할지</li>
+        </ul>
+        <a class="buy" href="https://product.kyobobook.co.kr/detail/S000221773230" target="_blank" rel="noopener">교보문고에서 보기</a>
+      </div>
+    </div>
+    <div class="book">
+      <img src="assets/book_parent.jpg" alt="AI 시대, 부모로 살아가기 표지" loading="lazy">
+      <div>
+        <div class="bt">AI 시대, 부모로 살아가기</div>
+        <div class="bm">김덕진 · 임한나 지음</div>
+        <ul>
+          <li>AI 교수 아빠와 유아교육 전문가 엄마가 합의한 우리 집 AI 원칙</li>
+          <li>말이 먼저, 글이 그다음, AI는 마지막</li>
+          <li>학부모 상담과 가정 안내에 그대로 쓸 수 있는 이야기</li>
+        </ul>
+        <a class="buy" href="https://product.kyobobook.co.kr/detail/S000221031456" target="_blank" rel="noopener">교보문고에서 보기</a>
+      </div>
+    </div>
+  </div>
+</div>
 </main>
 
 <footer>

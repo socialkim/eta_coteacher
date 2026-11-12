@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI, 두 번째 협력교사 · 실습 페이지</title>
+<meta name="description" content="ETA 협력교사를 위한 챗GPT 실습 프롬프트 모음(한국어·영어). ITCL 김덕진 강연 자료.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --ink:#181818;--body:#33363d;--muted:#666b75;--line:#e3e6eb;--card:#fafbfc;--bg:#f2f3f6;--white:#fff;
+  --coral:#FF5A4F;--coral-soft:#fff0ee;--blue:#2964FF;--blue-soft:#eaf0ff;--purple:#6B47DC;--purple-soft:#f1edfd;
+  --magenta:#E8358C;--magenta-soft:#fdeef5;--green:#1F7A2E;--green-soft:#e6f6e8;
+  --r:14px;--rs:10px;
+  --font:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:17px;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.65;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+.hero{background:#111;color:#fff;padding:40px 18px 34px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--coral)}
+.hero-in{max-width:920px;margin:0 auto}
+.brand{font-weight:900;letter-spacing:-.5px;font-size:1.05rem;margin-bottom:18px}
+.pill{display:inline-block;background:var(--coral);color:#fff;border-radius:999px;padding:3px 12px;font-size:.78rem;font-weight:700;margin-bottom:12px}
+.hero h1{font-size:clamp(1.55rem,5.4vw,2.2rem);font-weight:900;letter-spacing:-.02em;line-height:1.3}
+.hero .sub{color:rgba(255,255,255,.78);margin-top:8px;font-size:clamp(.95rem,2.6vw,1.05rem)}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px}
+.note{background:var(--white);border:1px solid var(--line);border-left:5px solid var(--coral);border-radius:0 var(--rs) var(--rs) 0;padding:14px 16px;margin-top:-16px;position:relative;z-index:2;font-size:.98rem;color:var(--body)}
+.note b{color:var(--ink)}
+.navwrap{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1px solid var(--line);margin-top:16px}
+.nav{max-width:920px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px}
+.nav::-webkit-scrollbar{display:none}
+.nav button{flex:0 0 auto;padding:14px 12px;font:700 .93rem var(--font);color:var(--muted);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+.nav button.on{color:var(--ink);border-bottom-color:var(--coral)}
+main{max-width:920px;margin:0 auto;padding:20px 16px 80px}
+section{display:none}
+section.on{display:block}
+.sh{display:flex;align-items:center;gap:10px;margin:6px 0 6px}
+.sh .num{width:40px;height:40px;border-radius:11px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+.sh h2{font-size:1.25rem;font-weight:800;letter-spacing:-.01em;line-height:1.35}
+.sd{color:var(--body);margin-bottom:16px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+.ch{display:flex;align-items:center;gap:8px;padding:12px 14px 8px;flex-wrap:wrap}
+.tag{font-size:.75rem;font-weight:800;padding:3px 9px;border-radius:6px;color:#fff;background:var(--ink)}
+.ct{font-weight:800;font-size:1.02rem;flex:1;min-width:160px}
+.tog{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.tog button{font:700 .8rem var(--font);padding:5px 11px;border:none;background:var(--white);color:var(--muted);cursor:pointer}
+.tog button.on{background:var(--ink);color:#fff}
+.cb{padding:0 14px 14px}
+.p{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--rs);padding:14px 15px 14px;white-space:pre-wrap;font-size:1.02rem;line-height:1.78;color:var(--body);cursor:pointer}
+.p .blank{background:#fff3c4;border-radius:4px;padding:0 3px;color:#5d4600}
+.copy{display:block;width:100%;margin-top:8px;height:42px;border-radius:var(--rs);border:1px solid var(--line);background:var(--white);font:700 .92rem var(--font);color:var(--ink);cursor:pointer}
+.copy.done{background:var(--green-soft);border-color:var(--green);color:var(--green)}
+.look{margin-top:10px;font-size:.96rem;color:var(--muted)}
+.look b{color:var(--ink)}
+.box{border-radius:0 var(--rs) var(--rs) 0;padding:12px 15px;margin-bottom:14px;font-size:.98rem;border-left:4px solid}
+.box.blue{background:var(--blue-soft);border-color:var(--blue);color:#1d3576}
+.box.warn{background:var(--coral-soft);border-color:var(--coral);color:#7a2a22}
+.box.ok{background:var(--green-soft);border-color:var(--green);color:#1a5527}
+.box b{color:inherit}
+.steps{display:grid;gap:10px;margin-bottom:14px}
+.step{display:flex;gap:12px;background:var(--white);border:1px solid var(--line);border-radius:var(--rs);padding:12px 14px}
+.step .n{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
+.step b{display:block}
+.step span{color:var(--muted);font-size:.95rem}
+table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:var(--rs);overflow:hidden;margin-bottom:14px;font-size:.95rem}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#f4f5f7;color:var(--muted);font-size:.85rem}
+.tw{overflow-x:auto}
+.five{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.five div{background:var(--white);border:1px solid var(--line);border-radius:var(--rs);padding:12px}
+.five b{display:block;font-size:1.05rem}
+.five span{color:var(--muted);font-size:.92rem}
+.big3{display:grid;gap:10px;margin-bottom:14px}
+.big3 div{background:var(--white);border:1px solid var(--line);border-left:5px solid var(--coral);border-radius:0 var(--rs) var(--rs) 0;padding:12px 15px}
+.big3 b{font-size:1.1rem}
+footer{max-width:920px;margin:0 auto;padding:24px 16px 50px;color:var(--muted);font-size:.85rem;line-height:1.7}
+footer a{color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#111;color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;font-size:.92rem;opacity:0;transition:.25s;z-index:99;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (max-width:420px){html{font-size:16px}.ch{padding:11px 12px 7px}.cb{padding:0 12px 12px}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-in">
+  <div class="brand">ITCL</div>
+  <span class="pill">2026.11.24 · Fulbright ETA 협력교사 전문성 개발 워크숍</span>
+  <h1>AI, 두 번째 협력교사</h1>
+  <p class="sub">ETA와 함께하는 교실을 위한 챗GPT 실습 페이지 · 한국어와 영어 프롬프트</p>
+</div></header>
+
+<div class="wrap"><div class="note">
+  <b>쓰는 법</b>: 회색 상자를 누르거나 <b>복사</b> 버튼을 누른 뒤 챗GPT에 붙여 넣으세요. <span style="background:#fff3c4;border-radius:4px;padding:0 3px">노란 칸</span>만 우리 반 이야기로 바꾸면 됩니다. 학생·ETA의 <b>실명과 개인정보는 넣지 않습니다</b>. 화면 안내는 2026년 11월 10일 무료 계정 기준이며, 메뉴 이름은 바뀔 수 있습니다.
+</div></div>
+
+<div class="navwrap"><nav class="nav" id="nav">
+  <button data-t="s0" class="on">0 시작 전</button>
+  <button data-t="s1">1 영어 수업</button>
+  <button data-t="s2">2 ETA와 일하기</button>
+  <button data-t="s3">3 지키기</button>
+  <button data-t="s4">4 학교급별</button>
+</nav></div>
+
+<main>
+<!-- 0 시작 전 -->
+<section id="s0" class="on">
+  <div class="sh"><div class="num" style="background:var(--blue)">0</div><h2>시작 전: 설정 세 개</h2></div>
+  <p class="sd">수업이나 업무에 쓰기 전에 한 번만 해 두면 됩니다.</p>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><div><b>메모리 확인</b><span>설정 → 개인 맞춤 설정 → 메모리. ‘메모리 요약’을 열어 계정에 무엇이 남아 있는지 봅니다. 수업 시연용 계정이면 끄거나 정리합니다.</span></div></div>
+    <div class="step"><div class="n">2</div><div><b>임시 채팅 쓰기</b><span>새 채팅 오른쪽 위 ‘임시 채팅’. ‘개인화되지 않음’을 고르면 메모리와 사용자 지정 지침을 쓰지 않고, 기록에도 남지 않습니다. 화면 안내대로 사본은 안전을 위해 최대 30일 보관될 수 있습니다.</span></div></div>
+    <div class="step"><div class="n">3</div><div><b>학습 허용 끄기</b><span>설정 → 데이터 관리 → ‘모델 개선을 위한 데이터 학습 허용’ 끄기. 휴대폰 앱은 메뉴 이름이 다를 수 있습니다.</span></div></div>
+  </div>
+  <div class="box blue"><b>공부하기(학습 모드)</b>는 웹 메뉴에 보이지 않으면 주소창에 <b>chatgpt.com/studymode</b> 를 입력해 엽니다. 예약과 공부하기는 임시 채팅에서는 쓸 수 없습니다.</div>
+  <div class="box warn"><b>나이 기준</b>: 챗GPT는 만 13세 이상, 만 18세 미만은 부모 또는 법정대리인의 허가가 필요합니다(OpenAI 이용약관). 초등학생은 학생 계정 없이 교사 시연으로 진행합니다. 중1 학기 초에는 만 13세 미만 학생이 많고, 중2까지는 만 14세 미만(개인정보 처리에 법정대리인 동의 필요)이 섞여 있으니 학생 계정은 학교·교육청 기준과 보호자 동의부터 확인합니다.</div>
+</section>
+
+<!-- 1 영어 수업 -->
+<section id="s1">
+  <div class="sh"><div class="num" style="background:var(--magenta)">1</div><h2>영어 수업에 들이는 법</h2></div>
+  <p class="sd">연습 상대는 AI, 기준과 피드백 설계는 교사. 규칙을 먼저 주는 것이 핵심입니다.</p>
+
+  <div class="card" data-k="1-1">
+    <div class="ch"><span class="tag" style="background:var(--magenta)">1-1</span><span class="ct">말하기 롤플레이 (음성으로 이어 가기)</span><span class="tog"><button class="on" data-l="ko">한국어</button><button data-l="en">English</button></span></div>
+    <div class="cb">
+      <div class="p" data-l="ko">지금부터 영어 말하기 연습 상대가 되어 줘. 너는 <span class="blank">[미국 카페 직원]</span>이고, 나는 <span class="blank">[중학교 1학년]</span> 학생이야. 규칙: ① 쉬운 단어로 천천히 ② 한 번에 한 문장만 묻기 ③ 내가 틀려도 중간에 고치지 말고, 대화가 끝나면 한 가지만 고쳐 주기 ④ 내가 help라고 하면 쓸 수 있는 표현 두 개를 알려 주기. 첫 마디를 시작해.</div>
+      <div class="p" data-l="en" hidden>Be my English speaking partner. You are <span class="blank">[a café worker in the U.S.]</span> and I am a <span class="blank">[7th-grade]</span> student. Rules: 1) Use easy words and speak slowly. 2) Ask only one question at a time. 3) Do not correct me during the conversation; when we finish, correct only one thing. 4) If I say "help," give me two expressions I can use. Please start.</div>
+      <button class="copy">복사</button>
+      <p class="look"><b>이어서</b>: 입력창의 음성 버튼을 누르면 같은 대화를 소리로 이어 갑니다. 속도는 “조금 더 천천히 말해 줘”처럼 말로 요청합니다. 목소리는 설정 → 음성 스타일(미국 영어·영국 영어·한국어 등). 만 13세 미만 학생이 있는 반이면 교사 기기로 시연합니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--magenta)">1-2</span><span class="ct">발음 듣기와 음절·강세</span><span class="tog"><button class="on" data-l="ko">한국어</button><button data-l="en">English</button></span></div>
+    <div class="cb">
+      <div class="p" data-l="ko"><span class="blank">[comfortable, vegetable]</span> 발음을 음절로 나눠서 들려줘. 강세도 표시해 줘.</div>
+      <div class="p" data-l="en" hidden>Break <span class="blank">[comfortable, vegetable]</span> into syllables, mark the stress, and let me hear the pronunciation.</div>
+      <button class="copy">복사</button>
+      <p class="look"><b>볼 곳</b>: 발음 블록의 재생 버튼·속도·‘플래시카드에 추가’. 음절 수와 강세 설명은 사전과 한 번 대조합니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--magenta)">1-3</span><span class="ct">공부하기(학습 모드)에 교사 규칙 한 줄</span><span class="tog"><button class="on" data-l="ko">한국어</button><button data-l="en">English</button></span></div>
+    <div class="cb">
+      <div class="p" data-l="ko">선생님이 정한 규칙이야. 내가 틀리면 정답을 말하지 말고 더 쉬운 힌트를 하나만 줘. 틀린 답에 '거의 맞았다'고 하지 마. 내가 맞히면 왜 맞는지 내가 설명하게 해 줘. 오늘 공부할 것: <span class="blank">[현재완료 since와 for]</span></div>
+      <div class="p" data-l="en" hidden>These are my teacher's rules. If I am wrong, do not tell me the answer; give me one easier hint. Do not say "almost right" when I am wrong. When I get it right, ask me to explain why. Today's topic: <span class="blank">[present perfect with "since" and "for"]</span></div>
+      <button class="copy">복사</button>
+      <div class="box warn" style="margin:10px 0 0">이런 규칙을 말하면 메모리에 저장될 수 있습니다(‘메모리 업데이트됨’ 표시). 공용·시연 계정이면 메모리를 확인하세요.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--magenta)">1-4</span><span class="ct">같은 주제, 세 수준의 지문</span><span class="tog"><button class="on" data-l="ko">한국어</button><button data-l="en">English</button></span></div>
+    <div class="cb">
+      <div class="p" data-l="ko">영어 수업 자료를 만들려고 해. 주제는 <span class="blank">[추석과 미국의 추수감사절]</span>이야. 같은 내용을 세 수준의 영어 지문으로 써 줘. ① <span class="blank">[초등 5~6학년: 70단어 안팎, 현재형 위주]</span> ② <span class="blank">[중학 2학년: 120단어 안팎]</span> ③ <span class="blank">[고등 1학년: 180단어 안팎, 관계대명사와 분사구문 포함]</span>. 각 지문 아래에 핵심 어휘 4개와 이해 확인 질문 2개를 붙여 줘. 질문 하나는 '너라면?'처럼 생각을 묻는 질문으로.</div>
+      <div class="p" data-l="en" hidden>I am making materials for an English class. Topic: <span class="blank">[Chuseok and American Thanksgiving]</span>. Write the same content at three levels: 1) <span class="blank">[Grades 5–6: about 70 words, mainly present tense]</span> 2) <span class="blank">[Grade 8: about 120 words]</span> 3) <span class="blank">[Grade 10: about 180 words, include relative pronouns and participial phrases]</span>. Under each text, add 4 key words and 2 comprehension questions. Make one question a "What would you do?" question.</div>
+      <button class="copy">복사</button>
+      <p class="look"><b>확인</b>: 단어 수와 문법 조건이 지켜졌는지 한 번 셉니다. 미국 문화 부분은 ETA에게 자연스러운지 봐 달라고 하면 문화 교류 수업이 됩니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--magenta)">1-5</span><span class="ct">힌트형 쓰기 피드백 (고쳐 쓰지 않기)</span><span class="tog"><button class="on" data-l="ko">한국어</button><button data-l="en">English</button></span></div>
+    <div class="cb">
+      <div class="p" data-l="ko"><span class="blank">[중학교 2학년]</span> 학생이 쓴 영어 글이야. 고쳐 쓰지 마. 아래 기준으로 학생에게 줄 피드백만 써 줘. ① 잘한 점 하나를 구체적으로 ② <span class="blank">[시제]</span> 오류는 정답을 알려 주지 말고, 어느 문장인지만 짚고 스스로 고치게 질문으로 ③ 내용을 더 풍부하게 할 질문 2개 ④ 학생에게 직접 말하듯 쉬운 영어로.
+[학생 글] <span class="blank">[이름을 지운 학생 글]</span></div>
+      <div class="p" data-l="en" hidden>Here is a piece of writing by a <span class="blank">[Grade 8]</span> student. Do not rewrite it. Give feedback to the student only, using these rules: 1) One specific strength. 2) For <span class="blank">[verb tense]</span> errors, do not give the answer; point to the sentence and ask a question so the student can fix it. 3) Two questions that help the student add more detail. 4) Use easy English, as if talking to the student.
+[Student writing] <span class="blank">[student text with the name removed]</span></div>
+      <button class="copy">복사</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--ink)">1-6</span><span class="ct">이어서: 교사용 메모와 반대 근거</span><span class="tog"><button class="on" data-l="ko">한국어</button><button data-l="en">English</button></span></div>
+    <div class="cb">
+      <div class="p" data-l="ko">이제 교사용 메모야(학생에게는 안 보여 줘). <span class="blank">[시제]</span> 말고 이 학생이 다음에 연습할 언어 포인트 2개를 한국어로 짚어 줘. 판단이 애매한 것은 '교사 확인 필요'라고 표시해 줘.</div>
+      <div class="p" data-l="en" hidden>Now write a note for the teacher only. Besides <span class="blank">[verb tense]</span>, point out two language points this student should practice next. Mark anything uncertain as "teacher check needed."</div>
+      <button class="copy">복사</button>
+      <div class="p" data-l="ko" style="margin-top:10px">방금 답한 내용 중에 확실하지 않은 부분을 표시해 줘. 그리고 반대 의견이나 반대 근거가 있다면 그것도 말해 줘.</div>
+      <div class="p" data-l="en" hidden style="margin-top:10px">Mark the parts of your answer you are not sure about. Then tell me any opposing views or evidence.</div>
+      <button class="copy">복사</button>
+      <p class="look"><b>교사가 할 일</b>: AI의 진단이 맞는지 영어 교사의 눈으로 확인합니다. 그럴듯하지만 빗나간 진단이 나올 수 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2 ETA와 일하기 -->
+<section id="s2">
+  <div class="sh"><div class="num" style="background:var(--coral)">2</div><h2>ETA와 함께 일하는 법</h2></div>
+  <p class="sd">통역과 문서는 AI와 나누고, 관계는 사람이 지킵니다. ETA의 실명·여권·비자·건강 정보는 넣지 않습니다.</p>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--coral)">2-1</span><span class="ct">ETA와 공동 수업안: 먼저 묻게 하기(ABA)</span><span class="tog"><button class="on" data-l="ko">한국어</button><button data-l="en">English</button></span></div>
+    <div class="cb">
+      <div class="p" data-l="ko">다음 주에 원어민 보조교사(ETA)와 함께 할 <span class="blank">[중학교 1학년 영어 수업(45분)]</span>을 짜려고 해. 바로 만들지 말고, 좋은 수업안을 만드는 데 필요한 것을 나에게 먼저 물어봐. 질문은 한 번에 하나씩, 최대 다섯 개.</div>
+      <div class="p" data-l="en" hidden>I am planning a <span class="blank">[45-minute 7th-grade English class]</span> with our English Teaching Assistant (ETA) next week. Do not write the plan yet. First ask me what you need to know, one question at a time, up to five questions.</div>
+      <button class="copy">복사</button>
+      <p class="look" style="margin-bottom:6px"><b>다섯 질문에 답한 뒤 이어서</b></p>
+      <div class="p" data-l="ko">좋아, 시간별 표로 한국인 교사와 ETA의 역할을 나눠서 만들어 줘. 수업 전 ETA에게 보낼 짧은 영어 안내 메시지도 써 줘.</div>
+      <div class="p" data-l="en" hidden>Great. Now make a timeline table that divides the roles of the Korean teacher and the ETA. Also write a short message in English to send to the ETA before class.</div>
+      <button class="copy">복사</button>
+      <p class="look"><b>볼 곳</b>: AI가 묻는 질문(목표·수준·역할·방식·범위)이 곧 ETA와의 협의 체크리스트입니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--coral)">2-2</span><span class="ct">주간 안내: 번역 말고 ‘왜 하는지’까지</span></div>
+    <div class="cb">
+      <div class="p">이번 주 학교 일정을 우리 학교 ETA(미국인, 한국 학교 첫해)에게 영어로 안내하려고 해. 그냥 번역하지 말고, 미국 학교에는 없어서 낯설 만한 것은 왜 하는지 한 줄씩 설명을 붙여 줘. ETA가 해야 할 일과 안 해도 되는 일도 구분해 줘. 내가 적지 않은 내용은 추측하지 말고 '확인 필요'라고 표시해 줘.
+[이번 주 일정] <span class="blank">[월: 전교 조회 / 화: 2학년 말하기 수행평가 / …]</span></div>
+      <button class="copy">복사</button>
+      <p class="look"><b>보내기 전에</b>: 입력에 없던 판단(참석 여부, 회식 등)이 붙지 않았는지 확인합니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--coral)">2-3</span><span class="ct">예약: 매주 월요일 아침에 안내문 틀 받기</span></div>
+    <div class="cb">
+      <div class="p">매주 월요일 아침에 나를 위해 'ETA 주간 안내문 틀'을 만들어 줘. 요일별로 Event / What is it? / Your role 칸을 비워 두고, 내가 일정만 채우면 되게. 끝에 '협력교사가 이번 주 ETA에게 물어볼 것' 짧은 영어 질문 3개도 붙여 줘.</div>
+      <button class="copy">복사</button>
+      <p class="look"><b>확인</b>: 사이드바 ‘예약’에서 요일과 시간을 확인하고, 첫 결과를 보고 지침을 고칩니다. 무료 계정은 활성 예약 3개까지(OpenAI 안내). 일반 채팅에서 만들어야 합니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--coral)">2-4</span><span class="ct">어려운 대화 리허설 (가명으로)</span></div>
+    <div class="cb">
+      <div class="p">ETA와의 어려운 대화를 미리 연습하고 싶어. 너는 우리 학교 ETA <span class="blank">['Sam'(가명, 미국인, 한국 첫해)]</span> 역할을 해 줘. 상황: <span class="blank">[수행평가 재시험이 있는 주에 휴가를 신청함]</span>. 나는 <span class="blank">[거절하되 관계는 지키고]</span> 싶어. 자연스럽게 영어로 반응하고, 한 번에 두세 문장만 말해. 내가 '피드백'이라고 하면 내 영어 말투를 한국어로 평가하고, 관계를 지킬 수 있는 대안 표현도 두 개 알려 줘.</div>
+      <button class="copy">복사</button>
+      <p class="look"><b>사람이 할 일</b>: 실제 대안(다른 주 휴가 등)과 학교 규정은 협력교사가 정합니다. 실제 이름과 사정은 넣지 않습니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--coral)">2-5</span><span class="ct">생활 지원: 보여 주기만 하면 되는 한·영 카드</span></div>
+    <div class="cb">
+      <div class="p">우리 학교 ETA가 <span class="blank">[감기 증상으로 동네 내과에]</span> 혼자 가야 해. <span class="blank">[접수부터 약국까지]</span> 보여 주기만 하면 되는 한·영 상황 카드를 만들어 줘. 한국어 문장을 위에, 영어 뜻을 아래에. 고를 것은 보기로. 이름·생년월일 같은 개인정보 칸은 빈칸으로 두고, 의학적 조언은 넣지 마.</div>
+      <button class="copy">복사</button>
+      <p class="look"><b>바꿔 쓰기</b>: [은행 계좌 개설], [휴대폰 개통], [택배 받기], [집 수리 요청]으로 노란 칸만 바꿉니다. 빈칸은 종이나 메모에 채우고 AI에는 넣지 않습니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--coral)">2-6</span><span class="ct">문서: 명세 6칸 (예: 겨울 영어캠프 가정통신문)</span></div>
+    <div class="cb">
+      <div class="p">① 목표: <span class="blank">학부모가 캠프 일정·준비물·신청 방법을 한 번에 알게</span>
+② 맥락: <span class="blank">중학교 1~2학년, ETA와 함께 하는 3일 캠프, 처음 여는 행사</span>
+③ 자료: <span class="blank">[일정표·장소·준비물 목록 붙여 넣기, 학생 정보 없이]</span>
+④ 조건: <span class="blank">A4 한 장, 한국어 본문 + 영어 요약, 존댓말</span>
+⑤ 형식: <span class="blank">제목, 인사, 표, 신청 방법, 문의</span>
+⑥ 기준: <span class="blank">학부모가 3분 안에 읽고 신청할 수 있으면 된다. 과장 표현 금지</span>
+위 여섯 칸대로 가정통신문 초안을 써 줘. 모르는 정보는 지어내지 말고 [ ]로 비워 둬.</div>
+      <button class="copy">복사</button>
+      <p class="look"><b>사람 몫</b>: ② 맥락과 ⑥ 기준은 끝까지 사람이 씁니다. 학교·교육청 양식이 있으면 양식이 우선입니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--coral)">2-7</span><span class="ct">같은 틀로 매일 업무: 공문 · 학부모 문자 · 채점 기준표 · 협의 메모</span></div>
+    <div class="cb">
+      <div class="box warn" style="margin:0 0 10px">공문·회의 자료는 교육청 정보보안 지침이 허용하는 범위에서만, 개인정보를 지우고 넣습니다.</div>
+      <p class="look" style="margin:0 0 6px"><b>① 공문 요약</b></p>
+      <div class="p">아래 공문을 협력교사 입장에서 요약해 줘. 내가 할 일과 마감일, ETA에게 알릴 것을 나눠 줘. 확실하지 않은 것은 ‘원문 확인’으로 표시해. <span class="blank">[공개해도 되는 공문 본문]</span></div>
+      <button class="copy">복사</button>
+      <p class="look" style="margin:12px 0 6px"><b>② 학부모 문자 답장 초안</b></p>
+      <div class="p">학부모 문의에 보낼 답장 초안을 써 줘. 상황: <span class="blank">[영어캠프 신청 마감 문의]</span>. 정중하게 세 문장 이내로. 학교가 정하지 않은 약속은 쓰지 마. 이름은 넣지 않아.</div>
+      <button class="copy">복사</button>
+      <p class="look" style="margin:12px 0 6px"><b>③ 수행평가 채점 기준표 초안</b></p>
+      <div class="p"><span class="blank">[중2 영어 말하기 수행평가: 좋아하는 장소 소개]</span> 채점 기준표 초안을 만들어 줘. 평가 요소 3~4개, 수준 3단계, 학생이 이해할 수 있는 말로. 배점은 비워 둬.</div>
+      <button class="copy">복사</button>
+      <p class="look" style="margin:12px 0 6px"><b>④ 협의회 메모 정리</b></p>
+      <div class="p">아래 영어과 협의 메모를 결정 사항 · 담당 · 마감 · 다음 안건으로 정리해 줘. 메모에 없는 내용은 만들지 마. ETA용 영어 요약 세 줄도. <span class="blank">[메모]</span></div>
+      <button class="copy">복사</button>
+      <p class="look"><b>사람 몫</b>: 초안은 AI가, 마무리는 교사가. 채점 요소와 배점은 교과협의회와 학교 평가 계획이 정합니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--ink)">2-8</span><span class="ct">프로젝트 ‘ETA 협력 노트’ 지침</span></div>
+    <div class="cb">
+      <div class="p">너는 영어 협력교사의 업무 보조다. 답은 한국어와 영어를 함께 쓴다. 학교 일정과 문서는 이 프로젝트에 올린 자료만 근거로 하고, 확실하지 않으면 '확인 필요'라고 표시한다. 학생과 ETA의 개인정보는 묻지도 기록하지도 않는다.</div>
+      <button class="copy">복사</button>
+      <div class="tw"><table><tr><th>넣어도 되는 것</th><th>넣지 않는 것</th></tr>
+      <tr><td>학사일정 공개본, 영어과 수업 운영 규칙, 이름 없는 안내문 틀, ‘우리 반 AI 규칙’</td><td>ETA 여권·비자·외국인등록번호·건강 정보, ETA 평가·면담, 학생 명단·성적·상담 기록</td></tr></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 지키기 -->
+<section id="s3">
+  <div class="sh"><div class="num" style="background:var(--blue)">3</div><h2>지키기: 넣지 않고, 꺼 두고, 다시 묻는다</h2></div>
+  <p class="sd">학생에게도, 교사 자신에게도 같은 규칙입니다.</p>
+  <h3 style="margin:6px 0 8px">AI에 넣지 않는 다섯 가지</h3>
+  <div class="five">
+    <div><b>1 이름</b><span>학생·ETA 실명 대신 ‘학생A’, 가명</span></div>
+    <div><b>2 학교·연락처</b><span>학교·반·전화번호·주소</span></div>
+    <div><b>3 성적·기록</b><span>이름과 함께 있는 성적·상담·생활기록</span></div>
+    <div><b>4 얼굴</b><span>사진, 이름표가 보이는 숙제 사진</span></div>
+    <div><b>5 목소리·신분</b><span>학생 목소리 녹음, ETA 여권·비자·건강 정보</span></div>
+  </div>
+  <div class="tw"><table>
+    <tr><th>서비스·법</th><th>나이 기준</th></tr>
+    <tr><td>챗GPT (OpenAI 이용약관)</td><td>만 13세 이상, 만 18세 미만은 부모 또는 법정대리인의 허가</td></tr>
+    <tr><td>클로드 (Anthropic 약관)</td><td>만 18세 이상</td></tr>
+    <tr><td>개인정보 보호법</td><td>만 14세 미만 아동의 개인정보 처리에는 법정대리인 동의</td></tr>
+    <tr><td>중학생도 확인</td><td>중1 학기 초엔 만 13세 미만이 많고, 중2까지 만 14세 미만이 섞여 있습니다. 학교·교육청 기준과 보호자 동의부터</td></tr>
+  </table></div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--blue)">3-1</span><span class="ct">AI는 틀려도 당당합니다: 답이 나온 직후에</span><span class="tog"><button class="on" data-l="ko">한국어</button><button data-l="en">English</button></span></div>
+    <div class="cb">
+      <div class="p" data-l="ko">방금 답한 내용 중에 확실하지 않은 부분을 표시해 줘. 그리고 반대 의견이나 반대 근거가 있다면 그것도 말해 줘.</div>
+      <div class="p" data-l="en" hidden>Mark the parts of your answer you are not sure about. Then tell me any opposing views or evidence.</div>
+      <button class="copy">복사</button>
+      <p class="look"><b>확인할 곳</b>: 숫자·날짜·이름·출처는 원본과 대조합니다. 틀린 답에도 “거의 맞았어요”라고 맞장구칠 수 있습니다. 붙어 온 사진·링크는 그대로 쓰지 않습니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="tag" style="background:var(--blue)">3-2</span><span class="ct">수행평가에 붙이는 ‘AI 사용 기록’ 4칸 (예시 양식)</span></div>
+    <div class="cb">
+      <div class="p">1. 어디에 썼나: 아이디어 / 어휘 / 문법 확인 / 말하기 연습 / 쓰지 않음
+2. 무엇을 물었나: (내가 넣은 프롬프트 한두 줄, 개인정보 없이)
+3. 받아들이고 · 고치고 · 버린 것: (AI 답 중 무엇을 썼고, 무엇을 고쳤고, 무엇을 버렸나)
+4. 내 생각: (AI 없이 쓴 내 첫 문장, 그리고 지금 내 생각)</div>
+      <button class="copy">복사</button>
+      <p class="look">강연자가 제안한 예시 양식입니다. 실제 양식과 허용 범위는 학교 학업성적관리규정과 평가 계획을 따릅니다.</p>
+    </div>
+  </div>
+
+  <h3 style="margin:16px 0 8px">학급 3문장 규칙</h3>
+  <div class="big3">
+    <div><b>1. Think first</b><br>묻기 전에 내 생각 한 문장. 첫 문장은 학생의 것.</div>
+    <div><b>2. Hints only</b><br>답 대신 힌트, 또는 선택지 두세 개. “고쳐 줘” 대신 “어디를 다시 볼까?”</div>
+    <div><b>3. Last word is mine</b><br>마지막 문장과 판단은 내가. 받아들이고, 고치고, 버린다.</div>
+  </div>
+  <div class="box ok"><b>진짜와 가짜</b>: 친구·선생님·ETA의 사진과 목소리는 장난으로라도 합성하지 않습니다. 놀라운 소식은 믿을 만한 자료 두 곳에서 확인합니다. ‘급해’ 전화에 대비해 가족끼리 확인 질문을 정해 둡니다.</div>
+</section>
+
+<!-- 4 학교급별 -->
+<section id="s4">
+  <div class="sh"><div class="num" style="background:var(--purple)">4</div><h2>학교급별 첫걸음 (강연자 제안)</h2></div>
+  <p class="sd">같은 원칙, 다른 첫걸음. 실제 기준은 학교와 교육청을 따릅니다.</p>
+  <div class="tw"><table>
+    <tr><th>학교급</th><th>첫걸음</th></tr>
+    <tr><td><b>초등학교</b></td><td>학생 계정 없이 교사 기기로 시연 · ‘AI일까, 아닐까?’ 분류 놀이 · AI 틀리게 만들기 놀이 · 말이 먼저, 글이 그다음, AI는 마지막</td></tr>
+    <tr><td><b>중학교</b></td><td>만 13세 미만 학생(중1 일부) 확인 · 학교 기준과 보호자 동의 확인 · 말하기 롤플레이를 짝 활동으로 · 힌트형 피드백 받고 스스로 고치기 · AI 사용 기록 4칸 시작</td></tr>
+    <tr><td><b>고등학교</b></td><td>수행평가 AI 사용 범위 사전 안내 · 반대 근거와 출처 확인 습관 · 딥페이크 관련 법 이야기 · 에세이 첫 문장은 내 것</td></tr>
+  </table></div>
+  <div class="box blue"><b>창발인가, 위탁인가</b>: 생각을 넓히는 쓰임(모르는 단어 묻기, 내 초안에 질문형 피드백 받기, 반대 근거 묻기)은 권하고, 생각을 대신하는 쓰임(감상문·에세이 통째로 받기, 답만 받아 옮기기)은 피합니다.</div>
+</section>
+</main>
+
+<footer>
+  강연: 「AI, 두 번째 협력교사: ETA와 함께하는 교실을 위한 챗GPT 실전법」 · 2026.11.24 Fulbright ETA 협력교사 전문성 개발 워크숍 · 김덕진(IT커뮤니케이션연구소 소장, 세종사이버대학교 컴퓨터AI공학과 교수)<br>
+  참고: OpenAI 이용약관(2026.1.1 발효) · Anthropic 소비자 약관 · 한국교육과정평가원 「수업 및 평가를 위한 생성형 AI 활용 가이드라인」(2025.12) · 교육부·시도교육청 「수행평가 시 AI 활용 관리 방안」(2025.12) · OECD·EC AI Literacy Framework(2026) · 『AI 2027 트렌드&활용백과』<br>
+  화면 안내는 2026년 11월 10일 무료 계정 기준이며 서비스 변경에 따라 달라질 수 있습니다.
+</footer>
+<div class="toast" id="toast">복사했습니다</div>
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  nav.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+    nav.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});
+    document.querySelectorAll('main section').forEach(function(s){s.classList.toggle('on',s.id===b.dataset.t)});
+    window.scrollTo({top:document.querySelector('.navwrap').offsetTop-0,behavior:'smooth'});
+    try{localStorage.setItem('eta_tab',b.dataset.t)}catch(err){}
+  });
+  try{var t=localStorage.getItem('eta_tab');if(t){var bb=nav.querySelector('[data-t="'+t+'"]');if(bb)bb.click();window.scrollTo(0,0)}}catch(err){}
+  document.querySelectorAll('.tog').forEach(function(tg){
+    tg.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+      var card=tg.closest('.card');var l=b.dataset.l;
+      tg.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});
+      card.querySelectorAll('.p[data-l]').forEach(function(p){p.hidden=(p.dataset.l!==l)});
+    });
+  });
+  var toast=document.getElementById('toast');
+  function show(){toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},1400)}
+  function copyText(txt,btn){
+    var done=function(){show();if(btn){btn.classList.add('done');btn.textContent='복사됨';setTimeout(function(){btn.classList.remove('done');btn.textContent='복사'},1500)}};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done,function(){fallback(txt);done()})}else{fallback(txt);done()}
+  }
+  function fallback(txt){var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}
+  function visibleP(btn){var el=btn.previousElementSibling;while(el&&!(el.classList.contains('p')&&!el.hidden)){el=el.previousElementSibling}return el}
+  document.querySelectorAll('.copy').forEach(function(btn){btn.addEventListener('click',function(){var p=visibleP(btn);if(p)copyText(p.innerText.trim(),btn)})});
+  document.querySelectorAll('.p').forEach(function(p){p.addEventListener('click',function(){copyText(p.innerText.trim(),null)})});
+})();
+</script>
+</body>
+</html>
